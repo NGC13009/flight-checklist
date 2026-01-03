@@ -1,0 +1,403 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[left=0.8cm,right=0.8cm,top=1.4cm,bottom=1.5cm,headheight=1pt,includehead]{geometry}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+
+\setCJKmainfont[BoldFont=FandolHei-Bold]{FandolHei-Regular}
+\setmainfont{Arial}
+
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{lastpage}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{塞斯纳172天鹰 - 正常操作检查单}
+\chead{}  
+\rhead{Cessna 172 Skyhawk Checklist}              
+\cfoot{\small 第 \thepage\ 页 / 共 \pageref*{LastPage}\ 页}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\definecolor{lightred}{HTML}{ff0000}
+\definecolor{blue}{HTML}{000080}
+\definecolor{red}{HTML}{800000}
+\definecolor{green}{HTML}{008000}
+\definecolor{yellow}{HTML}{808000}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\newcounter{chkitem}
+
+% 检查项
+\newcommand{\chk}[2]{
+    \begingroup
+    \stepcounter{chkitem}
+    \small
+    \noindent
+    \def\thenumber{\makebox[1.5em][l]{\textbf{\thechkitem.}}}%
+    \sbox0{\thenumber#1\hspace{2em}\textbf{#2}}%
+    \ifdim\wd0>\linewidth
+        \resizebox{\linewidth}{!}{\makebox[\wd0]{\thenumber#1 \dotfill \textbf{#2}}}%
+    \else
+        \makebox[\linewidth]{\thenumber#1 \dotfill \textbf{#2}}%
+    \fi
+    \par
+    \endgroup
+}
+
+% 居中指令/小标题
+\newcommand{\inst}[1]{
+    \begingroup
+    \centering
+    \small \textbf{\textit{#1}}
+    \par
+    \endgroup
+    \vspace{2pt}
+}
+
+% 单板块
+\newtcolorbox{checklistbox}[2]{
+    colback=white,
+    colframe=#2,
+    colbacktitle=#2,
+    coltitle=white,
+    title=\textbf{#1},
+    fonttitle=\large,
+    sharp corners,
+    boxsep=1pt,
+    left=2pt,
+    right=2pt,
+    top=2pt,
+    bottom=2pt,
+    halign title=left,
+    arc=0mm,
+    boxrule=1pt,
+    before upper={\setcounter{chkitem}{0}},
+    after skip=5pt
+}
+
+\begin{document}
+
+% === 第一页：正常程序 (上) ===
+\begin{multicols}{2}
+
+    % --- 飞行前检查 ---
+    \begin{checklistbox}{飞行前检查 (PREFLIGHT INSPECTION)}{green}
+
+        \inst{尾部 (TAIL SECTION)}
+        \chk{系留/舵面锁 (Tie-Down/Lock)}{移除 (REMOVE)}
+        \chk{升降舵 \& 方向舵}{检查活动 (CHECK)}
+        \chk{导航灯 (Nav Lights)}{完好(白) (WHITE)}
+
+        \inst{右翼 (RIGHT WING)}
+        \chk{襟翼滑轨 \& 连杆}{检查 (CHECK)}
+        \chk{副翼 (Aileron)}{检查活动 (CHECK)}
+        \chk{导航灯 (Nav Light)}{完好(绿) (GREEN)}
+        \chk{燃油量 (Fuel Quantity)}{目视检查 (CHECK)}
+        \chk{油箱盖 (Fuel Filler Cap)}{锁紧 (SECURE)}
+        \chk{油箱沉淀槽 (Sump)}{排放 (DRAIN)}
+        \chk{主轮轮胎 (Main Wheel)}{29 PSI / 检查 (CHECK)}
+
+        \inst{机头 (NOSE)}
+        \chk{风挡 (Windshield)}{清洁 (CLEAN)}
+        \chk{轮挡 (Wheel Chocks)}{移除 (REMOVE)}
+        \chk{机油尺 (Oil Dipstick)}{6-8夸脱 (CHECK)}
+        \chk{燃油滤 (Fuel Strainer)}{排放4秒 (DRAIN)}
+        \chk{前轮 (Nose Wheel)}{31 PSI / 检查 (CHECK)}
+        \chk{减震支柱 (Shock Strut)}{检查充气 (CHECK)}
+        \chk{进气口 (Air Inlets)}{无异物 (CHECK)}
+        \chk{螺旋桨 \& 桨毂盖}{检查 (CHECK)}
+        \chk{静压孔 (Static Port)}{检查 (CHECK)}
+
+        \inst{左翼 (LEFT WING)}
+        \chk{主轮轮胎 (Main Wheel)}{29 PSI / 检查 (CHECK)}
+        \chk{油箱沉淀槽 (Sump)}{排放 (DRAIN)}
+        \chk{燃油量 (Fuel Quantity)}{目视检查 (CHECK)}
+        \chk{油箱盖 (Fuel Filler Cap)}{锁紧 (SECURE)}
+        \chk{皮托管/盖 (Pitot Tube)}{检查/移除 (CHECK)}
+        \chk{油箱通气口 (Vent)}{检查 (CHECK)}
+        \chk{失速警告孔 (Stall Vent)}{检查 (CHECK)}
+        \chk{导航灯 (Nav Light)}{完好(红) (RED)}
+        \chk{副翼 (Aileron)}{检查活动 (CHECK)}
+    \end{checklistbox}
+
+    \begin{checklistbox}{客舱检查 (CABIN CHECK)}{black}
+        \chk{证书/文档 (Documents)}{在机内 (IN AIRCRAFT)}
+        \chk{适航证/注册证}{检查 (CHECK)}
+        \chk{无线电台执照}{国际飞行 (INTL ONLY)}
+        \chk{操作手册/载重平衡}{检查 (CHECK)}
+        \chk{停机刹车 (Parking Brake)}{设置 (SET)}
+        \chk{驾驶盘锁 (Control Lock)}{移除 (REMOVE)}
+        \chk{点火开关 (Ignition Switch)}{关 (OFF)}
+        \chk{主开关 (Master Switch)}{开 (ON)}
+        \chk{燃油量表 (Fuel Quantity)}{检查油量 (CHECK)}
+        \chk{防撞/频闪灯}{检查工作 (CHECK)}
+        \chk{襟翼 (Flaps)}{放下检查 (DOWN)}
+        \chk{主开关 (Master Switch)}{关 (OFF)}
+        \chk{燃油选择器 (Fuel Selector)}{双 (BOTH)}
+        \chk{行李门 (Baggage Door)}{检查锁定 (SECURE)}
+    \end{checklistbox}
+
+    \begin{checklistbox}{引擎启动前检查 (BEFORE STARTING ENGINE)}{black}
+        \chk{轮挡 (Chocks)}{移除 (REMOVE)}
+        \chk{飞行前检查 (Preflight Inspection)}{完成 (COMPLETE)}
+        \chk{乘客简报 (Passenger Briefing)}{完成 (COMPLETE)}
+        \chk{座椅、安全带、安全绳}{调整并锁定}
+        \chk{刹车 (Brakes)}{测试并设定 (TEST \& SET)}
+        \chk{断路器 (Circuit Breakers)}{检查就位 (CHECK IN)}
+        \chk{无线电及电子设备 (Radios \& Electrical Equipment)}{关闭 (OFF)}
+        \chk{燃油选择器 (Fuel Selector)}{双油箱 (BOTH)}
+        \chk{拖杆 (Tow Bar)}{移除 (REMOVE)}
+    \end{checklistbox}
+
+    % --- 起动发动机 ---
+    \begin{checklistbox}{起动发动机 (STARTING ENGINE)}{black}
+        \chk{混合比 (Mixture)}{富油 (RICH)}
+        \chk{化油器加热 (Carb Heat)}{冷 (COLD)}
+        \chk{注油 (Prime)}{2-6次 (AS REQ)}
+        \chk{油门 (Throttle)}{开 1/8 英寸 (OPEN 1/8)}
+        \chk{主开关 (Master Switch)}{开 (ON)}
+        \chk{防撞灯 (Anti-collision)}{检查工作 (CHECK)}
+        \chk{螺旋桨区域 (Prop Area)}{净空 (CLEAR)}
+        \chk{点火开关 (Ignition)}{起动 (START)}
+        \chk{机油压力 (Oil Pressure)}{检查 (CHECK)}
+        \chk{暖机 (Warm-up)}{800-1200 RPM}
+        \chk{燃油泵 (Fuel Pump)}{关 (OFF)}
+        \chk{混合比 (Mixture)}{贫油滑行 (LEAN TAXI)}
+    \end{checklistbox}
+
+    % --- 滑行前 ---
+    \begin{checklistbox}{滑行前 (BEFORE TAXI)}{black}
+        \chk{灯光 \& 频闪灯}{按需 (AS REQ)}
+        \chk{无线电 (Radios)}{设置 (ON-SET)}
+        \chk{应答机 (Transponder)}{待命 (STANDBY)}
+        \chk{襟翼 (Flaps)}{收上 (UP)}
+        \chk{刹车 (Brakes)}{测试 (TEST)}
+    \end{checklistbox}
+
+    % --- 起飞前 ---
+    \begin{checklistbox}{起飞前 (BEFORE TAKEOFF)}{blue}
+        \chk{停机刹车 (Parking Brake)}{设置 (SET)}
+        \chk{座椅/安全带}{锁定 (SECURE)}
+        \chk{门窗 (Doors \& Windows)}{关闭锁定 (LOCKED)}
+        \chk{飞行操纵 (Flight Controls)}{自由正确 (FREE)}
+        \chk{燃油选择器 (Fuel Selector)}{双 (BOTH)}
+        \chk{升降舵配平 (Elevator Trim)}{起飞位 (SET T/O)}
+        \chk{混合比 (Mixture)}{富油 (RICH)}
+        \chk{油门 (Throttle)}{1700 RPM}
+        \inst{--- 1700 RPM 检查 ---}
+        \chk{磁电机 (Magnetos)}{检查 (CHECK)}
+        \inst{(最大跌落 125 / 最大压差 50)}
+        \chk{化油器加热 (Carb Heat)}{检查 (CHECK)}
+        \chk{真空表 (Suction Gage)}{4.6-5.4 (CHECK)}
+        \chk{发动机仪表 (Engine Inst)}{检查 (CHECK)}
+        \inst{---------------------}
+        \chk{油门 (Throttle)}{检查慢车 (CHECK IDLE)}
+        \chk{油门摩擦锁 (Friction Lock)}{调整 (ADJUST)}
+        \chk{无线电/航电}{设置 (SET)}
+        \chk{应答机 (Transponder)}{高度 (ALTITUDE)}
+        \chk{襟翼 (Wing Flaps)}{起飞设置 (SET)}
+        \chk{灯光 (Lights)}{按需 (AS DESIRED)}
+        \chk{刹车 (Brakes)}{松开 (RELEASE)}
+        \inst{注意记录起飞时间}
+    \end{checklistbox}
+
+    % --- 起飞 ---
+    \begin{checklistbox}{起飞 (TAKE OFF)}{red}
+        \inst{正常起飞 (NORMAL TAKEOFF)}
+        \chk{襟翼 (Wing Flaps)}{0 度 (0 DEG)}
+        \chk{化油器加热 (Carb Heat)}{冷 (COLD)}
+        \chk{油门 (Throttle)}{全开 (FULL OPEN)}
+        \chk{抬轮 (Lift Nose Wheel)}{60 MPH}
+        \chk{爬升速度 (Climb Speed)}{75-85 MPH}
+    \end{checklistbox}
+
+    % --- 航路爬升 ---
+    \begin{checklistbox}{航路爬升 (ENROUTE CLIMB)}{blue}
+        \chk{空速 (Airspeed)}{80-90 MPH}
+        \chk{油门 (Throttle)}{全开 (FULL OPEN)}
+        \chk{混合比 (Mixture)}{富油/3000ft以上贫油}
+    \end{checklistbox}
+
+    % --- 巡航 ---
+    \begin{checklistbox}{巡航 (CRUISE)}{black}
+        \chk{动力 (Power)}{2200-2700 RPM}
+        \chk{配平 (Elevator)}{调整 (ADJUST)}
+        \chk{混合比 (Mixture)}{最大转速贫油 (LEAN)}
+    \end{checklistbox}
+
+    % --- 下降 ---
+    \begin{checklistbox}{下降 (DESCENT)}{blue}
+        \chk{燃油选择器 (Fuel Selector)}{双 (BOTH)}
+        \chk{混合比 (Mixture)}{富油 (RICH)}
+        \chk{动力 (Power)}{按需 (AS DESIRED)}
+        \chk{化油器加热 (Carb Heat)}{按需 (AS REQ)}
+    \end{checklistbox}
+
+    % --- 着陆前 ---
+    \begin{checklistbox}{进近 (APPROACH)}{blue}
+        \chk{座椅/安全带}{锁定 (SECURE)}
+        \chk{燃油选择器 (Fuel Selector)}{双 (BOTH)}
+        \chk{混合比 (Mixture)}{富油 (RICH)}
+        \chk{化油器加热 (Carb Heat)}{全开 (FULL HEAT)}
+        \chk{襟翼 (Wing Flaps)}{按需 (AS DESIRED)}
+        \chk{空速 (襟翼收)}{70-80 MPH}
+        \chk{空速 (襟翼放)}{65-75 MPH}
+    \end{checklistbox}
+
+    % --- 复飞 ---
+    \begin{checklistbox}{复飞 (GO AROUND)}{red}
+        \chk{动力 (Power)}{全油门 (FULL)}
+        \chk{化油器加热 (Carb Heat)}{冷 (COLD)}
+        \chk{襟翼 (Wing Flaps)}{收至 20度 (RETRACT 20)}
+        \chk{空速 (Airspeed)}{65 MPH}
+        \chk{襟翼 (Wing Flaps)}{缓慢收起 (RETRACT)}
+    \end{checklistbox}
+
+    % --- 着陆 ---
+    \begin{checklistbox}{着陆 (LANDING)}{red}
+        \inst{正常着陆 (NORMAL LANDING)}
+        \chk{空速 (襟翼收)}{70-80 MPH}
+        \chk{襟翼 (Wing Flaps)}{按需 (<100 MPH)}
+        \chk{空速 (襟翼放)}{65-75 MPH}
+        \chk{接地 (Touchdown)}{主轮先接地 (MAINS 1st)}
+        \chk{着陆滑跑 (Roll)}{轻放前轮 (LOWER NOSE)}
+        \chk{刹车 (Braking)}{最低限度 (MINIMUM)}
+    \end{checklistbox}
+
+
+    % --- 着陆后 ---
+    \begin{checklistbox}{着陆后 (AFTER LANDING)}{blue}
+        \chk{襟翼 (Wing Flaps)}{收上 (UP)}
+        \chk{化油器加热 (Carb Heat)}{冷 (COLD)}
+        \chk{应答机 (Transponder)}{待命 (STANDBY)}
+        \chk{灯光 (Lights)}{按需 (AS REQ)}
+    \end{checklistbox}
+
+
+    % --- 关车 ---
+    \begin{checklistbox}{关车 (SHUTDOWN)}{green}
+        \chk{停机刹车 (Parking Brake)}{设置 (SET)}
+        \chk{无线电/电气设备}{关 (OFF)}
+        \chk{油门 (Throttle)}{1000 RPM}
+        \chk{混合比 (Mixture)}{截断 (IDLE CUT-OFF)}
+        \chk{点火开关 (Ignition Switch)}{关 (OFF)}
+        \chk{主开关 (Master)}{关 (OFF)}
+        \chk{驾驶盘锁 (Control Lock)}{安装 (INSTALL)}
+        \chk{霍布斯表/转速表}{记录 (RECORD)}
+        \chk{飞机 (Aircraft)}{锁定 (SECURE)}
+    \end{checklistbox}
+
+
+    % --- V-Speeds 参考数据 ---
+    \begin{checklistbox}{实用信息 (USEFUL INFO)}{yellow}
+        \inst{飞机速度 (V-Speeds)}
+        \chk{Vr (抬轮)}{60 MPH}
+        \chk{Vx (最佳爬升角)}{68 MPH}
+        \chk{Vy (最佳爬升率)}{91 MPH}
+        \chk{Va (机动速度)}{112 MPH}
+        \chk{Vfe (最大襟翼速度)}{100 MPH}
+        \chk{Vno (结构巡航)}{145 MPH}
+        \chk{Vne (不可超越)}{182 MPH}
+        \chk{Vs1 (失速-洁净)}{57 MPH}
+        \chk{Vso (失速-全构型)}{49 MPH}
+        \chk{Glide (滑翔)}{80 MPH}
+        \vspace{5pt}
+        \inst{重量与平衡 (Weight \& Balance)}
+        \chk{最大起飞重量}{2300 lbs}
+        \chk{燃油容量 (42 Gal)}{38 Gal 可用}
+    \end{checklistbox}
+
+    % --- 紧急程序 ---
+    \begin{checklistbox}{发动机失火 (ENGINE FIRE)}{lightred}
+        \inst{起动时发动机起火 (FIRE DURING START)}
+        \chk{起动机 (Starter)}{持续运转 (CRANK)}
+        \chk{油门 (Throttle)}{1700 RPM}
+        \inst{如果起动失败:}
+        \chk{起动机}{继续运转 2-3分钟}
+        \chk{混合比 (Mixture)}{截断 (IDLE CUT-OFF)}
+        \chk{燃油选择器 (Fuel Selector)}{关 (OFF)}
+        \chk{飞机 (Aircraft)}{撤离 (ABANDON)}
+    \end{checklistbox}
+
+    \begin{checklistbox}{起飞时动力丧失 (POWER LOSS T/O)}{lightred}
+        \inst{如果剩余跑道充足:}
+        \chk{操作}{直线前方着陆 (LAND STRAIGHT)}
+        \inst{如果剩余跑道不足:}
+        \chk{操作}{保持空速/仅小角度转弯}
+        \inst{如果已有足够高度:}
+        \chk{操作}{尝试重启 (RESTART)}
+    \end{checklistbox}
+
+    \begin{checklistbox}{飞行中发动机失效 (ENGINE FAIL FLIGHT)}{lightred}
+        \chk{空速 (Airspeed)}{80 MPH}
+        \chk{燃油选择器 (Fuel)}{切换油箱 (SWITCH TANK)}
+        \chk{混合比 (Mixture)}{富油 (RICH)}
+        \chk{化油器加热 (Carb Heat)}{开 (ON)}
+        \chk{发动机仪表}{检查原因 (CHECK)}
+        \chk{注油器 (Primer)}{锁好 (LOCKED)}
+        \chk{点火开关}{L/R/BOTH/START}
+        \chk{应答机 (Transponder)}{7700}
+        \chk{无线电 (Radio)}{121.5 MAYDAY}
+    \end{checklistbox}
+
+    \begin{checklistbox}{无动力紧急着陆 (EMERG LDING NO POWER)}{lightred}
+        \chk{空速 (Airspeed)}{80 MPH}
+        \chk{混合比 (Mixture)}{截断 (CUT-OFF)}
+        \chk{燃油选择器 (Fuel Selector)}{关 (OFF)}
+        \chk{点火开关 (Ignition)}{关 (OFF)}
+        \chk{襟翼 (Flaps)}{按需 (AS REQ)}
+        \chk{主开关 (Master Switch)}{关 (OFF)}
+        \chk{舱门 (Cabin Doors)}{打开 (UNLATCH)}
+        \chk{接地 (Touchdown)}{尾部略低 (TAIL LOW)}
+        \chk{刹车 (Braking)}{重踩 (HEAVY)}
+    \end{checklistbox}
+
+    \begin{checklistbox}{电气火灾 (ELECTRICAL FIRE)}{lightred}
+        \chk{主开关 (Master Switch)}{关 (OFF)}
+        \chk{所有电气开关}{关 (OFF)}
+        \chk{通风口/窗户 (Vents)}{打开排烟 (OPEN)}
+        \chk{暖风 (Cabin Heat)}{关 (OFF)}
+    \end{checklistbox}
+
+    \begin{checklistbox}{飞行中发动机起火 (FIRE IN FLIGHT)}{lightred}
+        \chk{混合比 (Mixture)}{截断 (CUT-OFF)}
+        \chk{燃油选择器 (Fuel)}{关 (OFF)}
+        \chk{主开关 (Master)}{关 (OFF)}
+        \chk{建立滑翔 (Glide)}{120 MPH}
+        \inst{如果火未熄灭，增加空速以尝试吹灭}
+        \chk{执行}{无动力紧急着陆}
+    \end{checklistbox}
+
+    \vspace{0.8cm}
+
+    \begingroup
+    \centering
+    \scriptsize
+    \color{gray}
+
+    % 免责声明
+    \textbf{FOR FLIGHT SIMULATION USE ONLY -- NOT FOR REAL AVIATION}\\
+    \textbf{仅供飞行模拟使用 -- 严禁用于真实飞行}\\
+
+    \vspace{3pt}
+
+    % 版权信息
+    来自于 Mentone Flying Club, Inc.\\
+    \href{https://mentoneflyingclub.org/}{https://mentoneflyingclub.org/}\\
+    Based on Cessna 172 Skyhawk Checklist.\\
+    Current as of January 2009 - N12874\\
+    \par
+    \endgroup
+
+\end{multicols}
+
+
+\end{document}

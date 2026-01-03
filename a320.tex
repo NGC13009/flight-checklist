@@ -1,0 +1,346 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[left=0.8cm,right=0.8cm,top=2.cm,bottom=2.4cm,headheight=15pt,includehead]{geometry}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+
+\setCJKmainfont[BoldFont=FandolHei-Bold]{FandolHei-Regular}
+\setmainfont{Arial}
+
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{lastpage}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{空中客车 A320/A321 正常操作检查单}
+\chead{}  
+\rhead{AIRBUS A320/A321 - NORMAL CHECKLIST}              
+\cfoot{\small 第 \thepage\ 页 / 共 \pageref*{LastPage}\ 页}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\definecolor{blue}{HTML}{000080}
+\definecolor{red}{HTML}{800000}
+\definecolor{green}{HTML}{008000}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\newcounter{chkitem}
+
+% 检查项
+\newcommand{\chk}[2]{
+    \begingroup
+    \stepcounter{chkitem}
+    \small
+    \noindent
+    \def\thenumber{\makebox[1.5em][l]{\textbf{\thechkitem.}}}%
+    \sbox0{\thenumber#1\hspace{2em}\textbf{#2}}%
+    \ifdim\wd0>\linewidth
+        \resizebox{\linewidth}{!}{\makebox[\wd0]{\thenumber#1 \dotfill \textbf{#2}}}%
+    \else
+        \makebox[\linewidth]{\thenumber#1 \dotfill \textbf{#2}}%
+    \fi
+    \par
+    \endgroup
+}
+
+% 居中指令/小标题
+\newcommand{\inst}[1]{
+    \begingroup
+    \centering
+    \small \textbf{\textit{#1}}
+    \par
+    \endgroup
+    \vspace{2pt}
+}
+
+% 单板块
+\newtcolorbox{checklistbox}[2]{
+    colback=white,
+    colframe=#2,
+    colbacktitle=#2,
+    coltitle=white,
+    title=\textbf{#1},
+    fonttitle=\large,
+    sharp corners,
+    boxsep=1pt,
+    left=2pt,
+    right=2pt,
+    top=2pt,
+    bottom=2pt,
+    halign title=left,
+    arc=0mm,
+    boxrule=1pt,
+    before upper={\setcounter{chkitem}{0}},
+    after skip=5pt
+}
+
+\begin{document}
+
+% === 第一页 ===
+\begin{multicols}{2}
+
+    \begin{checklistbox}{飞行前 流程 (PRE FLIGHT FLOWS)}{green}
+        下载航图 \& 通告 (NOTAMS)\\
+        检查天气 \& 预报\\
+        装载 乘客, 货物 \& 燃油
+
+        \vspace{5pt}
+        \centering \textbf{>> 启动 SKYTRACK <<}
+    \end{checklistbox}
+
+    \begin{checklistbox}{起动前检查单 (PRE START CHECKLIST)}{black}
+        \chk{停机刹车 (PARKING BRAKE)}{设置 (SET)}
+        \chk{轮挡 (CHOCKS)}{移除 (REMOVED)}
+        \chk{地面电源 (GPU)}{已连接 (CONNECTED)}
+        \chk{油门杆 (THROTTLE)}{慢车位 (IDLE)}
+        \chk{引擎主开关 (ENGINE MASTERS)}{关 (OFF)}
+        \chk{电池 (BATTERIES)}{开 (ON)}
+        \chk{发电机开关 (GENERATOR SWITCHES)}{开 (ON)}
+        \chk{外部电源 (EXT POWER)}{开 (ON)}
+        \chk{大气数据基准 (ADIRS)}{导航位 (SET TO NAV)}
+        \chk{面板显示 (PANEL DISPLAYS)}{亮度设置 (SET)}
+        \chk{航行灯 (NAV LIGHTS)}{开 (ON)}
+        \chk{面板灯光 (PANEL LIGHTS)}{按需 (ON if required)}
+        \chk{起落架手柄 (LANDING GEAR LEVER)}{检查放下 (CHECK DOWN)}
+        \chk{襟翼 (FLAPS)}{收上 (UP)}
+        \chk{扰流板 (SPOILER)}{收回 (RETRACTED)}
+        \chk{燃油量 (FUEL QUANTITY)}{检查 (CHECK)}
+        \chk{系好安全带 (FASTEN SEAT BELTS)}{开 (ON)}
+        \chk{禁止吸烟灯 (NO SMOKING SIGNS)}{开 (ON)}
+        \inst{检查天气 (ATIS, 飞行服务)}
+        \chk{除冰 (DE-ICE)}{测试 / 检查 (TEST/CHECK)}
+        \inst{请求放行 (Request Clearance)}
+        \chk{应答机 (TRANSPONDER)}{设置, 待机 (SET, STANDBY)}
+        \chk{防撞灯 (BEACON LIGHTS)}{开 (ON)}
+        \chk{应急灯 (EMERGENCY LIGHTS)}{预位 (ARM)}
+        \chk{飞行管理计算机 (FMC)}{设置, 检查 (SETUP, CHECK)}
+        \chk{离场简报 (DEPARTURE BRIEFING)}{完成 (COMPLETE)}
+        \chk{舱门 (DOORS)}{关闭 (CLOSED)}
+    \end{checklistbox}
+
+    \begin{checklistbox}{发动机起动检查单 (STARTUP CHECKLIST)}{black}
+        \chk{辅助动力装置 (APU)}{启动 (START)}
+        \chk{APU 引气 (APU BLEED)}{运行 (RUN)}
+        \chk{APU 发电机 (APU GEN)}{开 / 查电压 (ON / CHECK)}
+        \inst{请求推出 – 开始推出 (Request Pushback)}
+        \chk{油门杆 (THRUST LEVERS)}{慢车 (IDLE)}
+        \chk{引擎区域 (ENGINE AREA)}{净空 (CLEAR)}
+        \chk{燃油泵开关 (FUEL PUMP SWITCHES)}{开 (ON)}
+        \chk{模式选择钮 (MODE SELECTOR)}{点火/启动 (IGN/START)}
+        \chk{左引擎 (LEFT ENGINE)}{(ENG 1)}
+        \chk{引擎主开关 1 (ENGINE MASTER 1)}{启动 (START)}
+        \chk{N2 > 20\% 燃油流量 (FUEL FLOW)}{检查开启 (CHECK ON)}
+        \chk{N1 随 N2 增加 (N1 INCREASING)}{检查 (CHECK)}
+        \chk{滑油压力 (OIL PRESSURE)}{检查 (CHECK)}
+        \chk{发电机开关 (GENERATOR SWITCH)}{开 (ON)}
+        \chk{右引擎重复上述步骤 (REPEAT RIGHT)}{ (ENG 2)}
+        \chk{燃油流量 (FUEL FLOW)}{检查 (CHECK)}
+        \chk{液压泵开关 (HYDRAULIC PUMP)}{开 (ON)}
+        \chk{辅助动力装置 (APU)}{关 (OFF)}
+        \chk{模式选择钮 (MODE SELECTOR)}{正常 (NORM)}
+    \end{checklistbox}
+
+    \begin{checklistbox}{滑行前检查单 (BEFORE TAXI CHECKLIST)}{black}
+        \chk{探头/窗户加热 (PROBE/WINDOW HEAT)}{自动 (AUTO)}
+        \chk{航向指示/高度表 (HDG/ALTIMETERS)}{设置 (SET)}
+        \chk{备用仪表 (STDBY INSTRUMENTS)}{设置 (SET)}
+        \chk{无线电和航电 (RADIOS/AVIONICS)}{设置 (SET)}
+        \chk{自动驾驶 (AUTOPILOT)}{设置, 不激活 (SET, don't act)}
+        \chk{飞行指引 (F/D)}{开 (ON)}
+        \chk{自动刹车 (AUTOBRAKE)}{最大 (MAX)}
+        \chk{升降舵配平 (ELEVATOR TRIM)}{起飞位 (SET T/O)}
+        \chk{飞行操纵 (FLIGHT CONTROLS)}{自由且正确 (FREE)}
+        \inst{请求滑行许可 (Request Taxi Clearance)}
+    \end{checklistbox}
+
+    \begin{checklistbox}{滑行检查单 (TAXI CHECKLIST)}{blue}
+        \chk{滑行灯 (TAXI LIGHTS)}{开 (ON)}
+        \chk{停机刹车 (PARKING BRAKE)}{松开 (RELEASE)}
+        \chk{滑行至指定跑道}{速度最大 20 节}
+        \chk{刹车/陀螺/转弯 (BRKS/GYRO/TURN)}{检查 (CHECK)}
+        \chk{起飞构型 (T/O CONFIG)}{按压 / 检查 (CHECK)}
+        \chk{起飞备忘 (T/O MEMO)}{绿色 (GREEN)}
+    \end{checklistbox}
+
+    \begin{checklistbox}{起飞前检查单 (BEFORE TAKE-OFF)}{blue}
+        \chk{停机刹车 (PARKING BRAKE)}{设置 (SET)}
+        \chk{飞行仪表 (FLIGHT INSTRUMENTS)}{检查 (CHECK)}
+        \chk{引擎仪表 (ENGINE INSTRUMENTS)}{检查 (CHECK)}
+        \chk{起飞数据 (V1, VR, V2)}{检查 (CHECK)}
+        \chk{导航设备 (NAV EQUIPMENT)}{检查 (CHECK)}
+        \chk{着陆灯 (LANDING LIGHTS)}{开 (ON)}
+        \chk{频闪灯 (STROBE LIGHT)}{开 (ON)}
+        \chk{皮托管加热 (PITOT HEAT)}{自动 (AUTO)}
+        \chk{除冰 (DE-ICE)}{按需 (AS REQUIRED)}
+        \chk{应答机 (TRANSPONDER)}{TA/RA}
+        \inst{请求起飞许可 (Request Takeoff Clearance)}
+    \end{checklistbox}
+
+    \begin{checklistbox}{起飞检查单 (TAKE-OFF CHECKLIST)}{red}
+        \inst{平滑增加推力至 40\% N1 等待稳定}
+        \chk{起飞推力 (TAKEOFF THRUST)}{FULL 或 TO/GA}
+        \chk{刹车 (BRAKES)}{松开 (RELEASE)}
+        \chk{速度 100 节 (AT 100 KTS)}{速度交叉检查}
+        \chk{速度 V1 (AT V1)}{决定 (COMMITED / GO)}
+        \chk{速度 Vr (AT Vr)}{抬轮 (ROTATE)}
+        \chk{俯仰 (PITCH)}{慢拉至10度, 增至15度}
+        \chk{正爬升率 (POSITIVE RATE)}{收轮 (GEAR UP)}
+        \chk{过 F 速度 (PASSING F SPEED)}{襟翼 0 (FLAPS 0)}
+        \chk{扰流板 (SPOILERS)}{预位解除 (DISARM)}
+        \chk{着陆灯 (LANDING LIGHTS)}{按需 (AS REQUIRED)}
+    \end{checklistbox}
+
+    \begin{checklistbox}{爬升检查单 (CLIMB-OUT CHECKLIST)}{blue}
+        \chk{油门杆 (THRUST LEVERS)}{爬升卡位 (CLB DETENT)}
+        \chk{自动驾驶 1 (AP1)}{接通 (ENGAGE)}
+        \chk{滑行灯 (TAXI LIGHTS)}{关 (OFF)}
+        \inst{在过渡高度 (At Transition-Altitude)}
+        \chk{高度表 (ALTIMETER)}{设为标准 (STD 29.92/1013)}
+        \chk{10,000英尺以下}{最大 250 节 (MAX 250 KIAS)}
+        \chk{空管 (ATC)}{按需 (AS REQUIRED)}
+        \inst{通过 10,000 英尺 (Passing 10'000 ft)}
+        \chk{着陆灯 (LANDING LIGHTS)}{关 (OFF)}
+        \inst{高于 10,000 英尺 (Above 10'000 ft)}
+        \chk{系好安全带 (FASTEN SEAT BELTS)}{关 (OFF)}
+    \end{checklistbox}
+
+    \begin{checklistbox}{巡航检查单 (CRUISE CHECKLIST)}{black}
+        \inst{加速至巡航速度 (Accelerate to Cruise Speed)}
+        \chk{引擎 \& 仪表 (ENGINE \& INST)}{监控 (MONITOR)}
+        \chk{燃油量 (FUEL QUANTITY)}{检查 (CHECK)}
+        \chk{无线电 (RADIOS)}{调谐 \& 设置 (TUNED)}
+        \chk{自动驾驶 (AUTOPILOT)}{检查 \& 设置 (CHECK)}
+        \chk{灯光 (LIGHTS)}{按需 (AS REQUIRED)}
+        \chk{ATIS / 机场信息}{检查 (CHECK)}
+        \chk{高度表 (ALTIMETER)}{检查 (CHECK)}
+        \chk{无线电 (RADIOS)}{设置 (SET)}
+        \chk{除冰 (DE-ICE)}{按需 (AS REQUIRED)}
+        \chk{下降顶点 (TOD)}{设置 TCAS 至 BELOW}
+        \inst{下降速度 (Descent Speed)}
+        \chk{FL240}{0.76 MACH}
+        \chk{FL180}{0.67 MACH}
+        \inst{在过渡高度 (At Transition-Altitude)}
+        \chk{高度表 (ALTIMETER)}{重置为当地 (RESET LOCAL)}
+        \chk{FL120}{280 KIAS}
+        \inst{低于 10,000 英尺 (Below 10'000 ft)}
+        \chk{速度 (SPEED)}{250 KIAS}
+        \chk{着陆灯 (LANDING LIGHTS)}{开 (ON)}
+        \chk{着陆系统 (LS)}{开 (ON)}
+        \chk{燃油量 \& 平衡 (FUEL/BALANCE)}{检查 (CHECK)}
+        \chk{襟翼 / 起落架 (FLAPS / GEAR)}{检查收上 (CHECK UP)}
+        \inst{检查天气 (ATIS, 飞行服务)}
+    \end{checklistbox}
+
+    \begin{checklistbox}{进近检查单 (APPROACH CHECKLIST)}{blue}
+        \chk{系好安全带 (FASTEN SEAT BELTS)}{开 (ON)}
+        \chk{无线电 (RADIOS)}{设置 (SET)}
+        \chk{速度 (SPEED)}{建立 210 节}
+        \chk{着陆灯 (LANDING LIGHTS)}{检查开启 (CHECK ON)}
+        \chk{滑行灯 (TAXI LIGHTS)}{开 (ON)}
+        \chk{地面扰流板 (GND SPOILERS)}{预位 (ARM)}
+        \chk{自动刹车 (AUTO BRAKE)}{设置 (SET)}
+        \chk{襟翼 (FLAPS)}{襟翼 1 (FLAPS 1)}
+        \chk{速度 (SPEED)}{建立 180 节}
+        \chk{在 6 DME 处 (AT 6 DME)}{襟翼 2 (FLAPS 2)}
+        \chk{速度 (SPEED)}{管理模式 (MANAGED)}
+        \chk{起落架 (LANDING GEAR)}{放下 (DOWN)}
+        \chk{起落架 3 绿灯 (GEAR 3 GREEN)}{襟翼 3 (FLAPS 3)}
+        \chk{襟翼 (FLAPS)}{全襟翼 (FULL)}
+        \inst{最终下滑道下降 (Final Glideslope Descent)}
+        \chk{速度 (SPEED)}{建立 145 节}
+        \chk{停机刹车 (PARKING BRAKE)}{确认关闭 (VERIFY OFF)}
+        \chk{除冰 (DE-ICE)}{按需 (AS REQUIRED)}
+    \end{checklistbox}
+
+    \begin{checklistbox}{着陆检查单 (LANDING CHECKLIST)}{red}
+        \chk{起落架 (LANDING GEAR)}{检查放下 (CHECK DOWN)}
+        \chk{自动驾驶 (AUTOPILOT)}{按需 (AS REQUIRED)}
+        \chk{复飞高度 (GO-AROUND ALT)}{FCU 设置 (SET IN FCU)}
+        \chk{自动推力 (AUTO-THRUST)}{按需 (AS REQUIRED)}
+        \chk{着陆备忘 (LANDING MEMO)}{无蓝色 (NO BLUE)}
+        \chk{着陆速度 (LANDING SPEED)}{管理模式 (MANAGED)}
+        \chk{接地后 (AFTER TOUCH DOWN)}{反推 (REVERSE)}
+        \chk{扰流板 (SPOILERS)}{确认伸出 (EXTENDED)}
+        \chk{刹车 (BRAKES)}{按需 (AS REQUIRED)}
+        \chk{速度 60 节 (AT 60 KIAS)}{取消反推 (CANCEL REV)}
+    \end{checklistbox}
+
+
+    \begin{checklistbox}{着陆后检查单 (AFTER LANDING)}{blue}
+        \chk{扰流板 (SPOILERS)}{解除 (DISARMED)}
+        \chk{襟翼 (FLAPS)}{收回 (RETRACT)}
+        \chk{引擎模式 (ENG MODE SELECTOR)}{正常 (NORM)}
+        \chk{着陆灯 (LANDING LIGHTS)}{关 (OFF)}
+        \chk{频闪灯 (STROBE LIGHTS)}{关 (OFF)}
+        \chk{防冰 (ANTI ICE)}{按需 (AS REQUIRED)}
+        \chk{辅助动力装置 (APU)}{启动 (START)}
+        \chk{刹车温度 (BRAKE TEMP)}{检查 (CHECK)}
+        \chk{应答机 (TRANSPONDER)}{关 (OFF)}
+        \inst{滑行至指定机位 (速度最大 20 节)}
+        \chk{辅助动力装置 (APU)}{启动/检查 (START/CHECK)}
+        \chk{辅助动力装置 (APU)}{发电机开 (GEN ON)}
+        \chk{升降舵配平 (ELEVATOR TRIM)}{起飞设置 (T/O SET)}
+        \inst{转弯进入机位 (Turning into the Gate)}
+        \chk{滑行灯 (TAXI LIGHTS)}{关 (OFF)}
+    \end{checklistbox}
+
+    \begin{checklistbox}{停机 / 关车检查单 (PARKING / SHUTDOWN)}{green}
+        \chk{停机刹车 (PARKING BRAKES)}{设置 (SET)}
+        \chk{油门杆 (THRUST LEVERS)}{慢车 (IDLE)}
+        \chk{地面连接 (GROUND CONTACT)}{建立 (ESTABLISH)}
+        \chk{地面操作 (GROUND OPERATIONS)}{按需 (AS REQUIRED)}
+        \chk{电源 (ELECTRICAL POWER)}{建立 (ESTABLISH)}
+        \chk{引擎主开关 (ENGINE MASTER 1 \& 2)}{关 (OFF)}
+        \chk{停机刹车 (PARKING BRAKES)}{按需 (AS REQUIRED)}
+        \chk{航行灯 (NAV LIGHTS)}{关 (OFF)}
+        \chk{外部灯光 (EXTERIOR LIGHTS)}{按需 (AS REQUIRED)}
+        \chk{防冰 (ANTI ICE)}{关 (OFF)}
+        \chk{乘客指示灯 (PASSENGER SIGNS)}{关 (OFF)}
+        \chk{舱门 (DOORS)}{打开 (OPEN)}
+        \chk{飞行指引 (FLIGHT DIRECTOR)}{关 (OFF)}
+        \chk{APU 引气 (APU BLEED)}{按需 (AS REQUIRED)}
+        \chk{燃油泵 (FUEL PUMPS)}{全关 (ALL OFF)}
+        \chk{防撞灯 (BEACON)}{关 (OFF)}
+        \chk{ECAM 状态 (ECAM STS)}{按压 (DEPRESS)}
+        \chk{面板灯光 (PANEL LIGHTS)}{关 (OFF)}
+        \chk{大气数据 (ADIRS)}{关 (OFF)}
+        \chk{航电 (AVIONICS)}{关 (OFF)}
+        \chk{禁止吸烟 (NO SMOKING)}{关 (OFF)}
+        \chk{辅助动力装置 (APU)}{按需 (AS REQUIRED)}
+        \chk{电池 (BATTERIES)}{按需 (AS REQUIRED)}
+
+        \vspace{10pt}
+        \centering \textbf{>> SKYTRACK -- 提交飞行报告 (PIREP FILED) ! <<}
+    \end{checklistbox}
+
+    \vspace{2.8cm}
+
+    \begingroup
+    \centering
+    \scriptsize
+    \color{gray}
+
+    % 免责声明
+    \textbf{FOR FLIGHT SIMULATION USE ONLY -- NOT FOR REAL AVIATION}\\
+    \textbf{仅供飞行模拟使用 -- 严禁用于真实飞行}\\
+
+    \vspace{3pt}
+
+    % 版权信息
+    来自于 fly uk \\
+    \href{https://flyuk.aero/}{https://flyuk.aero/}\\
+    Based on Airbus A320 Standard Procedures.\\
+    UKV-PRD-A320-CHECKLIST-V4\\
+    \par
+    \endgroup
+
+\end{multicols}
+
+\end{document}

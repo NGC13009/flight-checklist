@@ -1,0 +1,64 @@
+# LaTeX specific
+*.aux
+*.bak
+*.bbl
+*.blg
+*.dvi
+*.eps
+*.fls
+*.fdb_latexmk
+*.log
+*.lof
+*.lot
+*.out
+*.pdf
+*.ps
+*.synctex*
+*.toc
+*.vrb
+*.xml
+*.gz
+*.zip
+*.tar
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+
+# Build directories
+build/
+output/
+latex/
+tex/
+figures/
+images/
+
+# Editors and IDEs
+*.swp
+*.swo
+*.swn
+*.tmp
+*.DS_Store
+*.idea/
+*.vscode/
+*.project
+*.sublime-project
+*.sublime-workspace
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+*.old
+*.orig
+*.rej
+*.patch
+*.diff
+
+# OS specific files
+*.DS_Store
+*.Trash-*
+*.swp
+*.swn
+*.swo
+
+!pdf/**
