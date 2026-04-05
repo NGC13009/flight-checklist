@@ -1,0 +1,564 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[left=0.8cm,right=0.8cm,top=2.cm,bottom=2.4cm,headheight=15pt,includehead]{geometry}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+
+\setCJKmainfont[BoldFont=FandolHei-Bold]{FandolHei-Regular}
+\setmainfont{Arial}
+
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{lastpage}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{booktabs}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{空中客车 A320neo 标准操作程序}
+\chead{}  
+\rhead{AIRBUS A320neo - STANDARD OPERATING PROCEDURES}              
+\cfoot{\small 第 \thepage\ 页 / 共 \pageref*{LastPage}\ 页}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\definecolor{blue}{HTML}{000080}
+\definecolor{red}{HTML}{800000}
+\definecolor{green}{HTML}{008000}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\newcounter{chkitem}
+
+\newcommand{\chk}[2]{
+    \begingroup
+    \stepcounter{chkitem}
+    \small
+    \noindent
+    \def\thenumber{\makebox[2.5em][l]{\textbf{\thechkitem.}}}%
+    \sbox0{\thenumber#1\hspace{2em}\textbf{#2}\;\;[\quad]}%   ← 添加方括号
+    \ifdim\wd0>\linewidth
+        \resizebox{\linewidth}{!}{\makebox[\wd0]{\thenumber#1 \dotfill \textbf{#2}\;\;[\quad]}}% ← 添加方括号
+    \else
+        \makebox[\linewidth]{\thenumber#1 \dotfill \textbf{#2}\;\;[\quad]}% ← 添加方括号
+    \fi
+    \par
+    \endgroup
+}
+
+\newcommand{\fululiebiao}[2]{
+    \begingroup
+    \stepcounter{chkitem}
+    \small
+    \noindent
+    \def\thenumber{\makebox[2.5em][l]{\textbf{\thechkitem.}}}%
+    \sbox0{\thenumber#1\hspace{2em}\textbf{#2}}%  去掉方括号
+    \ifdim\wd0>\linewidth
+        \resizebox{\linewidth}{!}{\makebox[\wd0]{\thenumber#1 \dotfill \textbf{#2}}}%
+    \else
+        \makebox[\linewidth]{\thenumber#1 \dotfill \textbf{#2}}%
+    \fi
+    \par
+    \endgroup
+}
+
+
+% 居中指令/小标题
+\newcommand{\inst}[1]{
+    \begingroup
+    \centering
+    \small \textbf{\textit{#1}}
+    \par
+    \endgroup
+    \vspace{2pt}
+}
+
+% 单板块
+\newtcolorbox{checklistbox}[2]{
+    breakable,
+    enhanced,
+    colback=white,
+    colframe=#2,
+    colbacktitle=#2,
+    coltitle=white,
+    title=\textbf{#1},
+    fonttitle=\large,
+    sharp corners,
+    boxsep=1pt,
+    left=2pt,
+    right=2pt,
+    top=2pt,
+    bottom=2pt,
+    halign title=left,
+    arc=0mm,
+    boxrule=1pt,
+    before upper={\setcounter{chkitem}{0}},
+    after skip=5pt,
+    overlay first={
+        \draw[line width=0.1pt, gray]
+            (frame.south west) -- (frame.south east);
+    },
+    overlay middle={
+        \draw[line width=0.1pt, gray]
+            (frame.north west) -- (frame.north east);
+    },
+    overlay last={
+        \draw[line width=0.1pt, gray]
+            (frame.north west) -- (frame.north east);
+    },
+}
+
+
+\begin{document}
+
+\begin{multicols}{2}
+    \begingroup
+    AIRBUS 320 NEO SOP \\
+    {}[\quad] 内部标记状态: [ o ] 通过 / [ x ] 未通过 / [ $\cdot$ ] 无需并跳过 \\
+    \endgroup
+
+    \begin{checklistbox}{签派 (DISPATCH)}{black}
+        \chk{酒精测试}{通过}
+        \chk{运行飞行计划(OFP)}{导出}
+    \end{checklistbox}
+
+    \begin{checklistbox}{冷舱准备 (COLD COCKPIT PREPARATION)}{black}
+        \inst{基本面板设置}
+        \chk{发动机1、2主控手柄}{OFF}
+        \chk{发动机方式选择器 (Engine Mode Selector)}{NORMAL}
+        \chk{气象雷达 (Weather Radar)}{OFF}
+        \chk{风切变PWS电门 (Predictive Windshear)}{OFF}
+        \chk{起落架手柄 (Landing Gear Lever)}{DOWN}
+        \chk{两部雨刮器选择器 (Wiper Selectors)}{OFF}
+
+        \inst{电源与仪表检查}
+        \chk{电瓶 (Battery) }{检查, 电压 >25.5V}
+        \chk{电瓶按钮}{ON}
+        \chk{外部电源按钮 (EXT PWR Button) }{ON}
+        \chk{无线电管理面板 (RMP) }{ON / 设置}
+        \chk{无线电甚高频通信VHF1/2}{设置音量}
+        \chk{无线电甚高频导航VOR1/2}{设置音量}
+        \chk{无线电无方向性信标台NDB1/2}{设置音量}
+        \chk{无线电选通VHF1}{选通}
+        \chk{音频控制面板 (ACP) }{ON / 设置}
+        \chk{导航灯 (Beacon)}{接通}
+        \chk{APU火警测试 (APU FIRE TEST) }{执行}
+        \chk{引擎1/2火警测试}{执行}
+        \chk{所有燃油泵}{接通}
+        \chk{APU}{启动 (当APU可用时)}
+        \chk{APU引气}{接通}
+        \chk{空调面板 (AIR COND Panel) }{设置}
+        \chk{所有IRS方式选择器 (IRS Mode Selectors) }{NAV}
+        \chk{机组氧气供应}{接通}
+        \chk{应急照明}{预位}
+        \chk{禁烟灯}{接通}
+        \chk{安全带指示灯}{断开}
+        \chk{顶板背光灯}{按需}
+        \chk{FCU背光灯}{按需}
+        \chk{PFD背光灯}{按需}
+        \chk{ND背光灯}{按需}
+        \chk{MCDU背光灯}{按需}
+        \chk{ECAM背光灯}{按需}
+        \chk{侧杆/鼻轮转向照明}{按需}
+        \chk{航图照明}{按需}
+        \chk{构型面板照明}{按需}
+        \chk{驾驶台背光灯}{按需}
+        \chk{备用指南针照明}{按需}
+        \chk{驾驶舱灯光}{按需}
+
+        \inst{接受飞机与数据初始化}
+        \chk{接受飞机, 按压 RCL 按钮 3 秒}{无召回}
+        \chk{记录本和 MEL/CDL 项目}{前三天正常, 无 MEL/CDL}
+        \chk{飞机形态小结}{检查}
+        \chk{运行工程通告 (OEB) }{检查}
+        \chk{ADIRS 对准}{检查}
+
+        \inst{MCDU - DATA 和 INIT 设置}
+        \chk{DATA页面检查数据库有效期}{正常}
+        \chk{DATA页面检查发动机信息}{正确}
+        \chk{DATA页面检查ATC信息}{正确}
+        \chk{DATA页面检查ADIRS信息}{正确}
+        \chk{INIT页面导入航路}{\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}
+        \chk{INIT页面导入航班号}{\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}
+        \chk{INIT页面导入巡航高度}{FL \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}
+        \chk{INIT页面导入风信息}{\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}
+        \chk{初始数据INIT}{确定}
+        \chk{机场数据获得}{有效期内}
+        \chk{初始装载计算}{交叉检查}
+        \chk{航图准备}{检查}
+        \chk{初始起飞性能数据}{计算并出示}
+
+        \inst{MCDU - PERF页面设置}
+        \chk{跑道}{V1 = \_\_\_\_\_\_ kt, VR = \_\_\_\_\_\_ kt, V2 = \_\_\_\_\_\_ kt}
+        \chk{绿点速度 (Green Dot)}{VG = \_\_\_\_\_\_ kt}
+        \chk{增速高度}{ACC ALT = \_\_\_\_\_\_ ft}
+        \chk{单发增速高度}{OEI ACC ALT = \_\_\_\_\_\_ ft}
+        \chk{停止余度 (Stop Margin)}{SM = \_\_\_\_\_\_ m}
+        \chk{修正海压}{QNH = \_\_\_\_\_\_ hPa}
+
+        \inst{系统检查与应急设备}
+        \chk{ECAM 氧气压力}{检查}
+        \chk{液压}{检查}
+        \chk{发动机滑油}{检查}
+        \chk{襟翼构型}{检查位置}
+        \chk{减速板手柄}{收回并解除预位}
+        \chk{蓄压器压力 (Accumulator Pressure)}{检查}
+        \chk{停留刹车手柄 (PARK BRAKE)}{ON}
+        \chk{刹车压力}{绿区}
+        \chk{应急设备}{检查}
+        \chk{排雨剂 (Rain Repellent)}{检查}
+        \chk{断路器面板 (C/B Panel)}{检查}
+        \chk{起落架销 (Landing Gear Pins)}{检查在机上并收起}
+
+        \inst{部检查与初始准备完成}
+        \chk{外部绕机检查}{执行}
+        \chk{起落架}{正常}
+        \chk{油箱盖}{正常并锁紧}
+        \chk{空速管}{皮托管保护套取下且无污染}
+        \chk{襟翼、缝翼、副翼、俯仰副翼、方向舵}{活动自由}
+        \chk{鼻轮}{解除锁定}
+        \chk{货舱门、舱门}{关闭并锁紧}
+        \chk{引擎状态、机翼污染状态、机尾防擦板}{正常}
+        \chk{驾驶舱初始准备完成}{}
+
+        \inst{FMGC 与离场简令}
+        \chk{FMGC 等待自动检查}{完成}
+        \chk{驾驶舱呼叫地面氧气测试}{检查}
+        \inst{离场简令}
+        \chk{跑道}{长 \_\_\_\_\_\_ m[ ] / ft [ ], \_\_\_\_\_\_\_\_\_\_\_\_ 程序离场}
+        \chk{起飞}{起始高 \_\_\_\_\_\_\_\_\_ ft, 过渡高 \_\_\_\_\_\_\_\_\_\_\_ ft}
+        \chk{额外燃油/时间}{\_\_\_\_\_\_\_\_\_\_ t / \_\_\_\_\_\_\_\_\_\_ min}
+        \chk{最低扇区高 (MSA)}{远 \_\_\_\_\_\_\_ ft, 高 \_\_\_\_\_\_\_ ft}
+        \chk{航行通告 (NOTAM) }{\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}
+        \chk{滑行路线}{\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}
+        \chk{中断起飞停止余度 }{\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ m[ ] / ft [ ]}
+        \chk{单发程序}{原IFR离场, 上升 \_\_\_ ft 后申请引导返场}
+        \chk{二计划}{\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ 号 ILS 盲降}
+        \chk{特殊运行}{\_\_\_\_\_\_\_\_\_ 离场, \_\_\_\_\_\_\_\_\_ 满足}
+        \chk{擦机尾角度}{起落架伸展 \_\_\_\_\_\_°, 压缩 \_\_\_\_\_\_°}
+        \chk{擦发动机角}{\_\_\_\_\_\_\_\_\_\_\_\_°}
+        \chk{最大横滚角}{\_\_\_\_\_\_\_\_\_\_\_\_°}
+        \chk{ND导航FCU面板}{选择VOR1/2}
+        \chk{FD指引}{接通}
+        \chk{LS指引}{断开}
+        \chk{公制高度}{按需}
+        \chk{HDG/V.S或TRK/FPA}{选择HDG/V.S}
+        \chk{FCU高度}{选择离场高度 \_\_\_\_\_\_\_\_\_\_ ft}
+
+        \inst{驾驶舱准备检查单 (Cockpit Preparation Checklist)}
+        \chk{起落架销和堵盖}{移除}
+        \chk{燃油量}{\_\_\_\_\_\_\_\_\_\_\_ kg, 平衡}
+        \chk{安全带 (Seat Belts)}{接通}
+        \chk{ADIRS}{NAV}
+        \chk{修正海压}{QNH \_\_\_\_\_\_\_\_\_\_\_ hPa}
+    \end{checklistbox}
+
+    \begin{checklistbox}{推出与发动机启动 (PUSHBACK \& ENGINE START)}{black}
+        \inst{推出前准备}
+        \chk{FOB 确认一致}{起飞数据不变}
+        \chk{断开外部电源}{撤离外部电源}
+        \chk{联系机坪}{\_\_\_\_\_\_\_\_\_\_ MHz}
+        \chk{(航班号) \_\_\_\_\_\_\_,  (机场) \_\_\_\_\_}{是否可以推出开车}
+        \chk{可以推出开车, 沿红线}{证实}
+
+        \inst{启动前检查单 (Before Start Checklist)}
+        \chk{停留刹车}{设置 (SET)}
+        \chk{起飞/推力调定}{V1 = \_\_\_\_\_\_\_\_\_\_\_\_ kt}
+        \chk{起飞/推力调定}{VR = \_\_\_\_\_\_\_\_\_\_\_\_ kt}
+        \chk{起飞/推力调定}{V2 = \_\_\_\_\_\_\_\_\_\_\_\_ kt}
+        \chk{灵活温度}{FLX = \_\_\_\_\_\_\_\_\_\_\_\_°C}
+        \chk{侧窗}{关闭}
+        \chk{信标灯 (Beacon)}{接通}
+        \chk{启动前检查单}{完成}
+        \chk{地面呼叫 “可以松刹车？”}{“压力零, 刹车已松开”}
+        \chk{推出红线}{“收到, 红线推出”}
+        \chk{“可以起动发动机吗？”}{“可以起动”}
+
+        \inst{发动机启动}
+        \chk{启动顺序}{2 发 → 1 发}
+        \chk{地面呼叫 “设置刹车”}{压力正常 → “刹车已设置”}
+        \chk{“可以脱开”}{脱开左侧 / 右侧 手势}
+
+        \inst{启动后检查单 (After Start Checklist)}
+        \chk{防冰 (Anti-Ice)}{OFF}
+        \chk{ECAM 状态}{已检查}
+        \chk{俯仰配平 (Pitch Trim)}{\_\_\_\_\_\_° UP [ ] / DN [ ]}
+        \chk{方向舵配平 (Rudder Trim)}{中立位}
+        \chk{滑油压力}{正常}
+        \chk{液压压力}{正常}
+    \end{checklistbox}
+
+    \begin{checklistbox}{滑行 (TAXI)}{black}
+        \inst{滑出申请与刹车检查}
+        \chk{“申请滑出”}{“可以滑出, 沿 \_\_\_ 外等”}
+        \chk{手势确认}{左侧/右侧畅通}
+        \chk{停留刹车松开}{压力零}
+        \chk{刹车检查}{压力零, 效应好}
+
+        \inst{滑行与飞行操作检查}
+        \chk{联系塔台}{\_\_\_\_\_\_\_\_\_\_\_ MHz}
+        \chk{侧杆 全上、全下、中立、全左、全右、中立}{检查}
+        \chk{方向舵脚蹬 全左、全右、中立}{检查}
+        \chk{滑行灯}{接通}
+        \chk{转向灯}{接通}
+        \chk{着陆灯}{两侧伸出}
+        \chk{高亮度白色频闪灯}{自动}
+        \chk{机翼冰灯}{接通}
+
+        \inst{滑行检查单 (Taxi Checklist)}
+        \chk{飞行操纵}{检查 (左右座)}
+        \chk{自动刹车}{MAX}
+        \chk{扰流板}{预位}
+        \chk{构型设置}{形态 1 / 2 (左右座)}
+        \chk{雷达}{ON}
+        \chk{预测风切变}{AUTO}
+        \chk{发动机方式选择器}{NORMAL}
+        \chk{构型test}{按下检查}
+        \chk{ECAM 备忘}{起飞无蓝字}
+    \end{checklistbox}
+
+    \begin{checklistbox}{起飞前 (BEFORE TAKEOFF)}{black}
+        \chk{起飞跑道}{确认跑道 \_\_\_\_\_\_\_\_\_ 号}
+        \chk{空中交通防撞 TCAS}{TA/RA}
+        \chk{应答机报告高度}{开启}
+        \chk{应答机状态}{开启}
+        \chk{应答机模式}{全部}
+        \chk{应答机通道}{TA/RA}
+        \chk{空调组件 1 和 2 (PACK 1 \& 2)}{按需}
+        \chk{着陆灯}{两部开启}
+        \chk{高亮度白色频闪灯}{开启}
+        \chk{起飞灯}{开启}
+        \chk{客舱检查}{检查}
+        \chk{联系塔台 (\_\_\_\_\_ MHz)}{证实起飞}
+    \end{checklistbox}
+
+    \begin{checklistbox}{起飞 (TAKEOFF) —— 记忆动作}{red}
+        \inst{起飞动作}
+        \chk{推力模式}{MAN-FLEX \_\_\_\_\_\_\_\_\_°检查}
+        \chk{AP SRS, RWY, A/THR BLUE预位}{检查}
+        \chk{推力设置 → 80 kt 检查 → V1 → 抬轮 (ROTATE)}{}
+        \chk{正上升 (POSITIVE CLIMB) → 收轮 (GEAR UP)}{}
+        \chk{AP1 自动驾驶接通}{检查}
+        \chk{联系离场 (\_\_\_\_\_\_\_\_\_\_\_\_ MHz)}{}
+
+        \inst{初始爬升}
+        \chk{离地高度}{增速高度修正海压 \_\_\_\_\_\_\_ ft}
+        \chk{LVR CLB  → THR CLB, A/THR 自动油门接通}{检查}
+        \chk{扰流板}{解除预位}
+        \chk{上升 增速高度 \_\_\_\_\_\_\_ ft → 转换高度 \_\_\_\_\_\_\_ ft}{}
+        \chk{(若构型二起飞)过F速度}{收构型1}
+        \chk{过S速度收构型0}{收构型0}
+        \chk{速度管理模式}{洋红色 \_\_\_\_\_\_\_\_\_\_ kt}
+        \chk{过渡高度}{设置 STD 标准海压}
+        \chk{着陆灯}{收起并关闭}
+        \chk{起飞灯}{关闭}
+        \chk{转向灯}{关闭}
+        \chk{机翼冰灯}{关闭}
+    \end{checklistbox}
+
+    \begin{checklistbox}{爬升 (CLIMB) —— 记忆动作}{red}
+        \chk{通过 10000 ft}{转换高度动作完成}
+        \chk{导航设备}{清除}
+        \chk{二计划}{拷贝}
+        \chk{推荐最大高度 FL398}{选择 FL\_\_\_\_\_ 按计划}
+        \chk{跟随ATC指引}{高度选定 FL\_\_\_\_\_}
+    \end{checklistbox}
+
+    \begin{checklistbox}{巡航 (CRUISE)}{black}
+        \chk{自动油门 A/THR}{MACH / SPEED}
+        \chk{自动驾驶 AP1/2}{NAV}
+        \chk{高度}{设置巡航高度 FL\_\_\_\_\_\_\_}
+        \chk{安全带指示灯}{关闭}
+    \end{checklistbox}
+
+    \begin{checklistbox}{下降前}{black}
+        \chk{进近阶段10分钟前}{天气, 着陆信息, 着陆性能}
+        \chk{修正海压}{QNH \_\_\_\_\_\_\_\_\_\_\_\_\_ hPa}
+        \chk{温度}{TEMP \_\_\_\_\_\_\_\_\_°}
+        \chk{转换高度}{\_\_\_\_\_\_\_\_\_\_\_\_ ft / FL \_\_\_\_\_\_\_\_ }
+        \chk{Vapp}{\_\_\_\_\_\_\_\_\_\_ kt}
+        \chk{地面风}{\_\_\_\_\_\_\_\_° / \_\_\_\_\_\_ kt}
+        \inst{进场简令}
+        \chk{进场程序}{\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}
+        \chk{跑道}{\_\_\_\_\_\_\_\_\_\_\_\_\_ 号}
+        \chk{ILS频率}{\_\_\_\_\_\_\_\_\_\_ MHz}
+        \chk{决断高度}{BARO [ ] \_\_\_\_\_\_ ft / RADIO [ ] \_\_\_\_\_\_ ft}
+        \chk{最低允许高度MSA}{\_\_\_\_\_\_\_\_ ft / \_\_\_\_ \_\_\_\_ft}
+        \chk{额外燃油/时间}{\_\_\_\_\_\_\_ kg / \_\_\_\_\_ h \_\_\_\_\_\_\_ min}
+        \chk{非标准状况NOTAM}{\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}
+        \chk{着陆构型}{构型全 [ ] / 构型3 [ ]}
+        \chk{自动刹车}{LOW [ ] / MED [ ] /NOT SET [ ] }
+        \chk{VAPP}{\_\_\_\_\_\_\_\_\_\_\_ kt}
+        \chk{停止余度}{> \_\_\_\_\_\_\_\_\_\_\_ m}
+        \chk{反推}{最大反推至 \_\_\_\_\_ kt, 然后反推慢车}
+        \chk{人工刹车}{\_\_\_\_\_\_\_\_\_\_\_ kt}
+        \chk{脱离}{\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ 快速脱离}
+    \end{checklistbox}
+
+    \begin{checklistbox}{下降 (DESCENT)}{black}
+        \inst{下降准备}
+        \chk{安全带指示灯}{接通}
+        \chk{客舱检查}{检查}
+        \chk{下修正海压 \_\_\_\_\_\_\_ ft → \_\_\_\_\_\_\_ ft}{证实}
+        \chk{自动油门推力模式设置}{检查}
+        \chk{速度管理}{\_\_\_\_\_\_\_\_ kt}
+        \chk{过渡高度通过}{检查}
+        \chk{机翼冰灯}{接通}
+        \chk{着陆灯}{伸出并接通}
+        \chk{转向灯}{接通}
+        \chk{起飞灯}{接通}
+        \chk{速度}{\_\_\_\_\_\_\_\_\_\_\_\_ kt 检查}
+
+        \inst{进近前}
+        \chk{HDG/V.S或TRK/FPA}{选择TRK [ ] / FPA [ ]}
+        \chk{修正海压调定}{QNH \_\_\_\_\_\_ hPa (左右座)}
+        \chk{决断高度MINIMUM}{BARO [ ] / RADIO [ ] \_\_\_\_\_ ft}
+        \chk{自动刹车}{LOW [ ] / MED [ ] / MAN [ ]}
+        \chk{发动机方式选择器}{NORMAL}
+        \chk{着陆重量评估}{不超重}
+    \end{checklistbox}
+
+    \begin{checklistbox}{进近 (APPROACH) —— 记忆动作}{red}
+        \inst{下降至截获}
+        \chk{LS指引}{接通}
+        \chk{盲降建立}{}
+        \chk{AP1+2, GS BLUE, LOC BLUE}{预位已检查}
+        \chk{联系塔台 (\_\_\_\_\_ MHz)}{证实地面风允许}
+
+        \inst{进近动作}
+        \chk{速度 180 kt, 襟翼 2 → GS*}{检查}
+        \chk{复飞高度设置}{\_\_\_\_\_\_\_\_ ft}
+        \chk{放轮 (GEAR DOWN) → GS* 已检查}{检查}
+        \chk{襟翼 3 → 襟翼全}{速度检查 (>140kt)}
+        \chk{扰流板}{预位}
+
+        \inst{着陆检查单 (Landing Checklist)}
+        \chk{ECAM 备忘}{着陆无蓝字}
+        \chk{着陆重量}{不超重}
+        \chk{复飞预案}{检查}
+        \chk{着陆许可}{收到}
+    \end{checklistbox}
+
+    \begin{checklistbox}{着陆 (LANDING) —— 记忆动作}{red}
+        \inst{最后进近与着陆}
+        \chk{AP OFF}{“自动驾驶断开, 我来操作”}
+        \chk{400 ft}{LAND 检查}
+        \chk{100 ft 以上}{继续 / 复飞}
+        \chk{300 ft}{MINIMUM → 200 ft → 100 ft → 跑道可见}
+        \chk{接地}{扰流板升起, 反推绿色, 减速}
+        \chk{70 kt}{反推慢车}
+        \chk{40 kt}{人工刹车}
+        \chk{快速脱离道}{脱离}
+        \chk{脱离路线 \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}{}
+
+        \inst{着陆后滑行}
+        \chk{联系地面 (\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ MHz)}{}
+        \chk{雷达和预测风切变}{OFF}
+        \chk{应答机}{关闭}
+        \chk{应答机模式}{ABOVE}
+        \chk{应答机通道}{TA}
+        \chk{刹车风扇}{开}
+        \chk{APU电门}{接通}
+        \chk{APU启动}{3秒后接通}
+        \chk{扰流板}{解除预位}
+        \chk{襟翼}{构型光洁}
+        \chk{(3分钟) APU启动后}{接通APU引气}
+        \chk{机翼冰灯}{关闭}
+        \chk{着陆灯}{关闭并收回}
+        \chk{滑行灯}{接通}
+        \chk{高亮度白色频闪灯}{关闭}
+        \chk{(着陆3分钟后)可关闭一侧发动机进行单发滑行}{}
+    \end{checklistbox}
+
+    \begin{checklistbox}{停机 (SHUTDOWN \& PARKING)}{black}
+        \chk{机位}{\_\_\_\_\_\_\_\_\_\_\_\_证实}
+        \chk{机翼冰灯}{关闭}
+        \chk{着陆灯}{关闭并收回}
+        \chk{滑行灯}{关闭}
+        \chk{高亮度白色频闪灯}{关闭}
+        \chk{转向灯}{关闭}
+        \chk{停留刹车}{设置, 压力正常}
+        \chk{停留刹车或轮挡}{设置}
+        \chk{发动机}{关 (ENG MASTER OFF)}
+        \chk{信标灯}{关闭}
+        \chk{请求地面电源}{接通}
+        \chk{APU引气}{关闭}
+        \chk{(10s后) APU}{关闭}
+        \chk{(3分钟后APU关闭) 燃油泵}{全关}
+        \chk{黄电动泵 (YELLOW ELEC PUMP)}{关}
+        \chk{安全带指示灯}{关闭}
+    \end{checklistbox}
+
+    \begin{checklistbox}{关车后动作 (POST SHUTDOWN)}{black}
+        \chk{所有IRS方式选择器 (IRS Mode Selectors) }{关闭}
+        \chk{机组氧气供应}{断开}
+        \chk{应急照明}{断开}
+        \chk{安全带指示灯与禁烟灯}{断开}
+        \chk{备用指南针照明}{断开}
+        \chk{电池}{断开}
+        \chk{导航灯}{断开}
+        \chk{地面电源}{断开}
+    \end{checklistbox}
+
+\end{multicols}
+
+\vspace{2.8cm}
+
+\begingroup
+\centering
+
+\begin{table}[htbp]
+\centering
+\caption{航空术语缩写对照表}
+\begin{tabular}{@{}p{1.2cm}p{2cm}p{6cm}p{3cm}@{}}
+\toprule
+序号 & 缩写 & 英文全称 & 中文翻译 \\
+\midrule
+1  & APU   & Auxiliary Power Unit                    & 辅助动力装置 \\
+2  & IRS   & Inertial Reference System               & 惯性基准系统 \\
+3  & ECAM  & Electronic Centralized Aircraft Monitor & 电子中央监控 \\
+4  & RMP   & Radio Management Panel                  & 无线电管理面板 \\
+5  & ACP   & Audio Control Panel                     & 音频控制面板 \\
+6  & OEB   & Operational Engineering Bulletin        & 运行工程通告 \\
+7  & MEL   & Minimum Equipment List                  & 最低设备清单 \\
+8  & CDL   & Configuration Deviation List            & 构型偏离清单 \\
+9  & FOB   & Fuel On Board                           & 机载燃油 \\
+10 & TCAS  & Traffic Collision Avoidance System      & 交通防撞系统 \\
+11 & TA/RA & Traffic Advisory / Resolution Advisory  & 交通咨询/决断咨询 \\
+12 & ILS   & Instrument Landing System               & 仪表着陆系统 \\
+13 & LOC   & Localizer                               & 航向道 \\
+14 & GS    & Glide Slope                             & 下滑道 \\
+15 & RNAV  & Area Navigation                         & 区域导航 \\
+16 & PBN   & Performance-Based Navigation            & 基于性能的导航 \\
+17 & V1    & Takeoff Decision Speed                  & 起飞决断速度 \\
+18 & VR    & Rotation Speed                          & 抬轮速度 \\
+19 & V2    & Takeoff Safety Speed                    & 起飞安全速度 \\
+20 & VAPP  & Approach Speed                          & 进近速度 \\
+21 & MSA   & Minimum Sector Altitude                 & 最低扇区高度 \\
+22 & NOTAM & Notice to Airmen                        & 航行通告 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\vspace{2.8cm}
+\par
+\scriptsize
+\color{gray}
+
+% 免责声明
+\textbf{FOR FLIGHT SIMULATION USE ONLY -- NOT FOR REAL AVIATION}\\
+\textbf{仅供飞行模拟使用 -- 严禁用于真实飞行}\\
+
+\vspace{3pt}
+
+% 版权信息
+来自于 NGC13009 \\
+2026年4月4日 \\
+AIRBUS 320 NEO SOP\\
+v2.0 \\
+\endgroup
+
+\end{document}
